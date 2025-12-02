@@ -1,0 +1,23 @@
+hostname R1
+!
+enable password cisco
+!
+service password-encryption
+!
+line vty 0 4
+ transport input telnet ssh
+ login
+ password admin123
+!
+snmp-server community public RO
+!
+ip ssh version 1
+!
+access-list 101 permit ip any any
+!
+username admin password 0 weakpass
+!
+interface GigabitEthernet0/0
+ ip address 192.168.1.1 255.255.255.0
+ no shutdown
+!

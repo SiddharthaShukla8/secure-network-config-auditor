@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+    <title>Network Config Auditor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+<div class="header">Secure Network Configuration Auditor</div>
+
+<div class="container">
+    <h2>Upload Configuration File / Paste Config</h2>
+
+    <form action="/scan" method="post" enctype="multipart/form-data">
+
+        <label>Select Configuration File:</label>
+        <input type="file" name="config">
+
+        <label>Or Paste Configuration:</label>
+        <textarea name="rawconfig" rows="12" placeholder="Paste router/switch config here..."></textarea>
+
+        <br><br>
+        <button type="submit">Scan Configuration</button>
+    </form>
+</div>
+</body>
+</html>
