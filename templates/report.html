@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html>
 <head>
     <title>Scan Report</title>
@@ -33,5 +33,53 @@
     <a class="back" href="/">← Scan Another File</a>
 </div>
 
+</body>
+</html> -->
+
+
+
+<!doctype html>
+<html>
+<head>
+    <title>Scan Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="header">Scan Report</div>
+
+<div class="container">
+    <h2>Summary</h2>
+    <ul class="meta-list">
+        <li><strong>Total lines scanned:</strong> {{ meta.lines_count }}</li>
+        <li><strong>Total issues detected:</strong> {{ meta.issues_count }}</li>
+        <li><strong>Scan time:</strong> {{ meta.scan_time }} seconds</li>
+    </ul>
+
+    <h2>Detected Issues</h2>
+
+    {% if results %}
+    <table>
+        <tr>
+            <th>Issue</th>
+            <th>Severity</th>
+            <th>Recommended Fix</th>
+        </tr>
+        {% for r in results %}
+        <tr>
+            <td>{{ r.issue }}</td>
+            <td>{{ r.severity }}</td>
+            <td>{{ r.fix }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+      <p>No critical issues detected in the provided configuration.</p>
+    {% endif %}
+
+    <h3>Raw JSON Output</h3>
+    <pre>{{ raw_json }}</pre>
+
+    <a class="back" href="{{ url_for('index') }}">← Scan Another File</a>
+</div>
 </body>
 </html>

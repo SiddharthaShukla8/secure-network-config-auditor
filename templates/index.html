@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html>
 <head>
     <title>Network Config Auditor</title>
@@ -20,6 +20,43 @@
         <textarea name="rawconfig" rows="12" placeholder="Paste router/switch config here..."></textarea>
 
         <br><br>
+        <button type="submit">Scan Configuration</button>
+    </form>
+</div>
+</body>
+</html> -->
+
+
+<!doctype html>
+<html>
+<head>
+    <title>Secure Network Configuration Auditor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="header">Secure Network Configuration Auditor</div>
+
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-container">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <h2>Upload Configuration File or Paste Config</h2>
+
+    <form action="{{ url_for('scan') }}" method="post" enctype="multipart/form-data">
+        <label>Select Configuration File:</label>
+        <input type="file" name="config">
+
+        <label>Or Paste Configuration:</label>
+        <textarea name="rawconfig" rows="12"
+                  placeholder="Paste router/switch configuration here..."></textarea>
+
         <button type="submit">Scan Configuration</button>
     </form>
 </div>
