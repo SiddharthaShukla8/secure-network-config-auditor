@@ -1,58 +1,122 @@
 Secure Network Configuration Auditor
 
-A Python–Flask based tool that automatically scans router/switch configuration files to identify security vulnerabilities such as Telnet access, SSHv1 usage, weak passwords, insecure ACLs, and SNMP public communities. The tool provides severity-based alerts and recommended fixes through a simple and responsive web interface.
+A Python-Flask based auditing tool that scans router/switch configuration files and detects critical security vulnerabilities such as Telnet access, SSHv1, weak passwords, insecure ACLs, and SNMP public communities.
+The system provides severity-based alerts, recommended fixes, and a clean UI for uploading and analyzing configurations.
 
-📌 Features
+🚀 Features
 
-Upload or paste router/switch configuration files
+✔ Upload or paste router/switch configuration files
+✔ Cisco-style config parsing
+✔ Real-time vulnerability scanning
+✔ Severity levels (HIGH / MEDIUM / LOW)
+✔ Recommended fixes for every issue
+✔ Clean light-blue UI design
+✔ JSON and tabular results
+✔ Performance metrics (scan time, line count)
+✔ Error handling for invalid configs
 
-Automatic parsing of Cisco-style network configs
+🔐 Vulnerabilities Detected
 
-Vulnerability detection:
+Our system detects:
 
-Telnet enabled
+1. Telnet Enabled
 
-SSH version 1
+Identifies insecure remote access.
 
-Plaintext/weak passwords
+2. SSH Version 1
 
-SNMP community “public”
+Deprecated & unsafe protocol.
 
-permit ip any any ACL detection
+3. Weak or Plaintext Passwords
 
-Clean UI with light-blue theme
+Flags passwords like admin, 1234, cisco, etc.
 
-JSON-based detailed report
+4. SNMP Public/Private Communities
 
-Easy to extend with additional checks
+Old insecure monitoring configurations.
 
-🧠 Why This Project?
+5. Insecure ACL Rules
 
-Misconfigured network devices are one of the largest sources of security breaches.
-This tool automates the process of reviewing configuration files, making it faster and more reliable than manual audits.
+Example: permit ip any any.
 
-🛠️ Tech Stack
+6. Missing Best Practices
+
+No password encryption
+
+No login banner
+
+Weak authentication commands
+
+🧠 How It Works
+
+User uploads/pastes configuration
+
+Config parser extracts relevant sections
+
+Security engine runs multiple rule-based checks
+
+Issues are ranked by severity
+
+Results displayed in UI + JSON format
+
+🏗️ Project Architecture
+User Input (File/Text)
+        ↓
+Config Parser  →  Normalized Structure
+        ↓
+Security Check Engine (Multiple Modules)
+        ↓
+Issue Aggregator → Severity Ranking
+        ↓
+Flask Frontend UI → JSON + Table Output
+
+🖥️ Tech Stack
 
 Python 3
 
-Flask (Web Framework)
+Flask (Backend + UI engine)
 
 HTML/CSS (Frontend)
 
-Regex for parsing
+Regex-based parsing
 
-GNS3 / Packet Tracer (optional – for generating configs)
+GNS3 / Packet Tracer (for optional config generation)
 
 📁 Project Structure
 config_auditor/
 │
-├── app.py                 # Flask server
-├── parser_mod.py          # Config parser
-├── checks.py              # Vulnerability checks
+├── app.py
+├── parser_mod.py
+├── checks.py
 │
 ├── templates/
-│     ├── index.html       # Upload UI
-│     └── report.html      # Results page
+│     ├── index.html
+│     └── report.html
 │
-└── static/
-      └── style.css        # UI styling
+├── static/
+│     └── style.css
+│
+└── README.md
+
+📊 Performance Metrics (Example)
+Metric	           Value
+Total lines scanned	120
+Scan time	         0.004 sec
+Issues found	       5
+🌱 Future Scope
+
+Auto-fetch configs over SSH
+
+Multi-vendor support (Juniper, MikroTik, HP)
+
+Visualization dashboard
+
+ML-based risk scoring
+
+Export complete PDF report
+
+API support for enterprise integration
+
+📄 License
+
+This project is created for academic and research purposes under the Computer Networks course.
